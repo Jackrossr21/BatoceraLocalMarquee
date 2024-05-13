@@ -1,3 +1,4 @@
 #!/bin/bash
+
 System=$1
-/userdata/marquee.sh Systemselected "$System" &
+fbv "/userdata/roms/sysimages/$System.png" -fer

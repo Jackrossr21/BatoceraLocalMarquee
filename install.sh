@@ -1,27 +1,27 @@
 #!/bin/bash
 
-# Create directories
-mkdir -p /userdata/roms/Marquee
-mkdir -p /userdata/roms/Marquee/hires
-mkdir -p /userdata/roms/Marquee/systems
-mkdir -p /userdata/roms/Marquee/wheel
-mkdir -p /userdata/roms/Marquee/videos
+# Ensure script is executed with root privileges
+if [ "$(id -u)" != "0" ]; then
+    echo "This script must be run as root" 1>&2
+    exit 1
+fi
 
-# Copy scripts to appropriate locations
-cp marquee.sh /userdata/
-cp system.sh /userdata/system/configs/emulationstation/scripts/system-selected/
-cp game.sh /userdata/system/configs/emulationstation/scripts/game-selected/
-cp script.sh /userdata/system/scripts/
+# Check if the required directories exist, if not, create them
+mkdir -p /userdata/system/configs/emulationstation/scripts/system-selected/
+mkdir -p /userdata/system/configs/emulationstation/scripts/game-selected/
+mkdir -p /userdata/system/scripts/
 
-# Copy default images to Marquee directories
-cp default.jpg /userdata/roms/Marquee/
-cp default.png /userdata/roms/Marquee/
-cp default_system.png /userdata/roms/Marquee/
+# Copy required files to their respective directories
+cp /userdata/BatoceraLocalMarquee-main/system.sh /userdata/system/configs/emulationstation/scripts/system-selected/
+cp /userdata/BatoceraLocalMarquee-main/game.sh /userdata/system/configs/emulationstation/scripts/game-selected/
+cp /userdata/BatoceraLocalMarquee-main/script.sh /userdata/system/scripts/
 
-# Set permissions for scripts
-chmod +x /userdata/marquee.sh
-chmod +x /userdata/system.sh
-chmod +x /userdata/game.sh
-chmod +x /userdata/script.sh
+# Ensure default image file exists
+cp /userdata/BatoceraLocalMarquee-main/default.png /userdata/
+
+# Set permissions for the scripts
+chmod +x /userdata/system/configs/emulationstation/scripts/system-selected/system.sh
+chmod +x /userdata/system/configs/emulationstation/scripts/game-selected/game.sh
+chmod +x /userdata/system/scripts/script.sh
 
 echo "Installation completed successfully."

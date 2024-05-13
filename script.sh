@@ -2,8 +2,8 @@
 
 case $1 in
 gameStart)
-    gamepath="${5%/*}"
-    romname="${5##*/}"
+    gamepath=${5%/*}
+    romname=${5##*/}
     /userdata/marquee.sh Start "$gamepath" "${romname%.*}" &
     ;;
 gameStop)
